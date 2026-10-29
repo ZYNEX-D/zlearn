@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {simulate,experiments} from '../dist/model.js';
+test('titration starts at pH 1, reaches neutral equivalence, then becomes basic',()=>{assert.ok(Math.abs(simulate('titration',{volume:25,concentration:.1},0).a-1)<1e-8);assert.equal(simulate('titration',{volume:25,concentration:.1},1).a,7);assert.ok(simulate('titration',{volume:30,concentration:.1},1).a>11);});
+test('doubling base concentration halves equivalent volume',()=>assert.equal(simulate('titration',{volume:12.5,concentration:.2},1).a,7));
+test('gas production respects the limiting acid',()=>{const r=simulate('gas',{mass:1,concentration:.1},1);assert.ok(Math.abs(r.a-24.47)<1e-10);assert.equal(r.b,100);});
+test('electrolysis gas ratio is 2:1 and volume doubles with current',()=>{const a=simulate('electrolysis',{current:1,duration:300},1),b=simulate('electrolysis',{current:2,duration:300},1);assert.equal(a.a/a.b,2);assert.equal(b.a,2*a.a);});
+test('precipitation limited by least reagent',()=>{assert.ok(Math.abs(simulate('precipitation',{silver:.05,salt:.1},1).a-71.66)<1e-9);});
+test('heating uses heat capacity and boiling plateau',()=>{assert.ok(Math.abs(simulate('heating',{power:100,mass:100},1).a-(20+12000/418.4))<1e-9);assert.equal(simulate('heating',{power:1000,mass:50},1).a,100);});
+test('warmer water diffuses faster in the illustrative model',()=>{assert.ok(simulate('diffusion',{temperature:80,drops:2},.5).a>simulate('diffusion',{temperature:10,drops:2},.5).a);});
+test('all supported control extremes remain finite at all stages',()=>{for(let e of experiments)for(let edge of['min','max'])for(let t of[0,.1,.5,.999,1]){let p=Object.fromEntries(e.controls.map(c=>[c.id,c[edge]]));let r=simulate(e.id,p,t);assert.ok(Number.isFinite(r.a)&&Number.isFinite(r.b),e.id);}});
