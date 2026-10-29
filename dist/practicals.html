@@ -1,1 +1,103 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chemia · Curriculum workbench</title><link rel="stylesheet" href="practicals/workbench.css"></head><body><header><a href="/">◈ CHEMIA <small>SCIENCE LAB</small></a><span>Curriculum workbench</span><a href="/">Open 3D laboratory ↗</a></header><div class="layout"><aside><div class="eyebrow">YOUR PRACTICAL SYLLABUS</div><h1>Explore. Measure.<br>Understand.</h1><p id="summary"></p><label>Course<select id="track"><option value="">All courses</option></select></label><label>Find a practical<input id="search" type="search" placeholder="Try pendulum, titration…"></label><label>Support type<select id="filter"><option value="">All types</option><option>Analytical model</option><option>Guided demo</option><option>Partial</option></select></label><div id="count" role="status"></div><nav id="catalog" aria-label="Practical catalogue"></nav><button id="coverage">Export coverage audit</button></aside><main><div class="intro"><span class="eyebrow">A/L PHYSICS · CHEMISTRY · SCIENCE FOR TECHNOLOGY</span><p>Explore analytical models and guided observations alongside the 3D laboratory. These help with concepts and data analysis; they do not replace physical apparatus skills. “Partial” identifies missing parts of your checklist.</p></div><div id="heading"></div><div class="panel"><label>Activity<select id="module"></select></label><div class="bench"><div><div id="diagram"></div><div id="readings" aria-live="polite"></div></div><form id="controls"><div id="fields"></div><button class="primary" type="submit">Take reading / run demo</button><button type="button" id="reset">Reset settings</button><p id="notice" role="status"></p></form></div><div class="formula" id="equation"></div></div><div class="twocol"><section class="panel"><h2>Method & apparatus</h2><div id="method"></div></section><section class="panel"><h2>Model boundaries</h2><p id="limits"></p><p class="muted">Results are idealized or curated observations, not experimental measurements. Animation illustrates the model; it is not a validated simulation of handling real equipment.</p></section></div><section class="panel"><div class="sectionhead"><h2>Observation notebook</h2><button id="csv">Download CSV</button></div><p class="muted">Each run is recorded below. Records and conclusions stay in this browser, separately for each activity.</p><div class="tablewrap" id="table"></div><div class="axes"><label>Horizontal axis<select id="x"></select></label><label>Vertical axis<select id="y"></select></label></div><div id="graph"></div><label>Your hypothesis, analysis & conclusion<textarea id="conclusion" rows="4" placeholder="What did you vary? What relationship did you find? Include units and limitations."></textarea></label><button id="report">Download lab report</button><p id="storage" role="status"></p></section><footer id="sources"></footer></main></div><script type="module" src="practicals/workbench.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chemia · Curriculum Workbench</title>
+  <script type="module" crossorigin src="./assets/practicals-xANMcl_B.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-P2Xu9kJm.js">
+  <link rel="stylesheet" crossorigin href="./assets/practicals-grlqeFiH.css">
+</head>
+<body>
+<header>
+  <a href="/">◈ CHEMIA <small>SCIENCE LAB</small></a>
+  <a href="builder.html">Custom Lab Builder ↗</a>
+  <a href="/">Open 3D laboratory ↗</a>
+</header>
+<div class="layout">
+  <aside>
+    <div class="eyebrow">YOUR PRACTICAL SYLLABUS</div>
+    <h1>Explore. Measure.<br>Understand.</h1>
+    <p id="summary"></p>
+    <label>Course
+      <select id="track">
+        <option value="">All courses</option>
+      </select>
+    </label>
+    <label>Find a practical
+      <input id="search" type="search" placeholder="Try pendulum, titration…">
+    </label>
+    <label>Support type
+      <select id="filter">
+        <option value="">All types</option>
+        <option>Analytical model</option>
+        <option>Guided demo</option>
+        <option>Partial</option>
+      </select>
+    </label>
+    <div id="count" role="status"></div>
+    <nav id="catalog" aria-label="Practical catalogue"></nav>
+    <button id="coverage">Export coverage audit</button>
+  </aside>
+  <main>
+    <div class="intro">
+      <span class="eyebrow">A/L PHYSICS · CHEMISTRY · SCIENCE FOR TECHNOLOGY</span>
+      <p>Explore analytical models and guided observations alongside the 3D laboratory. These help with concepts and data analysis; they do not replace physical apparatus skills. “Partial” identifies missing parts of your checklist.</p>
+    </div>
+    <div id="heading"></div>
+    <div class="panel">
+      <label>Activity
+        <select id="module"></select>
+      </label>
+      <div class="bench">
+        <div>
+          <div id="diagram"></div>
+          <div id="readings" aria-live="polite"></div>
+        </div>
+        <form id="controls">
+          <div id="fields"></div>
+          <button class="primary" type="submit">Take reading / run demo</button>
+          <button type="button" id="reset">Reset settings</button>
+          <p id="notice" role="status"></p>
+        </form>
+      </div>
+      <div class="formula" id="equation"></div>
+    </div>
+    <div class="twocol">
+      <section class="panel">
+        <h2>Method & apparatus</h2>
+        <div id="method"></div>
+      </section>
+      <section class="panel">
+        <h2>Model boundaries</h2>
+        <p id="limits"></p>
+        <p class="muted">Results are idealized or curated observations, not experimental measurements. Animation illustrates the model; it is not a validated simulation of handling real equipment.</p>
+      </section>
+    </div>
+    <section class="panel">
+      <div class="sectionhead">
+        <h2>Observation notebook</h2>
+        <button id="csv">Download CSV</button>
+      </div>
+      <p class="muted">Each run is recorded below. Records and conclusions stay in this browser, separately for each activity.</p>
+      <div class="tablewrap" id="table"></div>
+      <div class="axes">
+        <label>Horizontal axis
+          <select id="x"></select>
+        </label>
+        <label>Vertical axis
+          <select id="y"></select>
+        </label>
+      </div>
+      <div id="graph"></div>
+      <label>Your hypothesis, analysis & conclusion
+        <textarea id="conclusion" rows="4" placeholder="What did you vary? What relationship did you find? Include units and limitations."></textarea>
+      </label>
+      <button id="report">Download lab report</button>
+      <p id="storage" role="status"></p>
+    </section>
+    <footer id="sources"></footer>
+  </main>
+</div>
+</body>
+</html>

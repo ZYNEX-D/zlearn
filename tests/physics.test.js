@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {experiments,simulate} from '../dist/model.js';
-import {physicsDuration} from '../dist/physics.js';
-import {sampleSeries,csvFor,plotSvg} from '../dist/analysis.js';
+import {experiments,simulate} from '../src/core/model.js';
+import {physicsDuration} from '../src/core/physics.js';
+import {sampleSeries,csvFor,plotSvg} from '../src/core/analysis.js';
 const defaults=id=>Object.fromEntries(experiments.find(e=>e.id===id).controls.map(c=>[c.id,c.value]));
 const close=(a,b,eps=1e-8)=>assert.ok(Math.abs(a-b)<eps,`${a} != ${b}`);
 test('pendulum period follows sqrt(length/gravity)',()=>{let p=defaults('pendulum'),r=simulate('pendulum',p,0),long=simulate('pendulum',{...p,length:p.length*4},0);close(long.b,2*r.b);close(simulate('pendulum',p,r.b/12).a,p.angle);});

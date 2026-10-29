@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import {models,defaults,calculate,regression} from '../dist/practicals/models.js';
-import {requirements,coverage} from '../dist/practicals/catalog.js';
-import {diagram} from '../dist/practicals/diagrams.js';
+import {models,defaults,calculate,regression} from '../src/practicals/models.js';
+import {requirements,coverage} from '../src/practicals/catalog.js';
+import {diagram} from '../src/practicals/diagrams.js';
 assert.equal(requirements.length,134);assert.equal(new Set(requirements.map(r=>r.id)).size,134);
 for(const r of requirements)assert.notEqual(coverage(r),'Missing model',r.title);
 let runs=0;

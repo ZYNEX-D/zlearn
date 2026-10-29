@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Chemia · Custom Lab Builder</title>
+  <script type="module" crossorigin src="./assets/builder-C43_e4eE.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-P2Xu9kJm.js">
+  <link rel="modulepreload" crossorigin href="./assets/vendor-three-CsUWSdVg.js">
+  <link rel="stylesheet" crossorigin href="./assets/builder-CJnCOUTX.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="/">CHEMIA<span>THE SCIENCE LAB</span></a>
+  <nav>
+    <a href="/">3D experiments</a>
+    <a href="practicals.html">A/L & SFT practicals</a>
+    <b>Custom builder</b>
+  </nav>
+  <span class="tag">EXPERIMENT YOUR WAY</span>
+</header>
+<div class="title">
+  <div>
+    <div class="eyebrow">CREATE / CONNECT / DISCOVER</div>
+    <h1>Your idea. Your laboratory<span>.</span></h1>
+    <p>Build a setup, connect apparatus, and watch the science unfold.</p>
+  </div>
+  <div class="title-actions">
+    <button id="undo">↶ Undo edit</button>
+    <button id="save">Save setup</button>
+    <button id="export">↓ Export setup</button>
+    <label class="button">Import JSON<input type="file" id="import" accept=".json" hidden></label>
+  </div>
+</div>
+<div class="layout">
+  <aside class="shelf">
+    <div class="eyebrow">01 / EQUIPMENT SHELF</div>
+    <h2>Start building</h2>
+    <label>Find apparatus<input type="search" id="search" placeholder="Beaker, lamp, cooler…"></label>
+    <div id="equipment"></div>
+    <details>
+      <summary>Supported rules</summary>
+      <p>Thermal links transfer heat to aqueous samples. Tube links connect a vessel → condenser → collector, or fictional stress source → chamber. Wire terminals form DC resistor circuits. Supports connect a stand to a pendulum.</p>
+      <p>Mixtures: water/dye, dilute strong acid/base with indicator, calcium chloride/carbonate precipitation, and illustrative effervescence. Other mixtures report “not modeled.”</p>
+      <p>Water phase changes use ideal heat capacities and latent heats; solutions use the same approximation. Smoke, flames, frost, fragments, and blast effects are illustrative. Chamber stress units and failure limits are fictional.</p>
+    </details>
+  </aside>
+  <main>
+    <div class="presetbar">
+      <label>Start from a setup
+        <select id="preset">
+          <option value="">Choose a template…</option>
+          <option value="empty">Empty bench</option>
+          <option value="freeze">❄ Freezing water</option>
+          <option value="boil">♨ Boiling & condensation</option>
+          <option value="smoke">Flame & smoke</option>
+          <option value="burst">Fictional rupture / explosion</option>
+          <option value="circuit">Build a light circuit</option>
+          <option value="overload">Lamp overload & damage</option>
+          <option value="pendulum">Custom pendulum</option>
+          <option value="mix">Precipitation</option>
+        </select>
+      </label>
+      <label>My saved setups
+        <select id="saved">
+          <option value="">Open saved setup…</option>
+        </select>
+      </label>
+    </div>
+    <section class="stage">
+      <div class="stagehead">
+        <span class="pill">● LIVE 3D WORKBENCH</span>
+        <span id="itemcount">0 apparatus</span>
+      </div>
+      <div id="viewport">
+        <canvas id="scene" aria-label="3D custom laboratory. Drag apparatus to move it."></canvas>
+        <div id="labels"></div>
+        <div id="fallback" hidden>3D is unavailable on this device. The item controls, simulation, readings, and exports still work.</div>
+        <div id="empty">Choose apparatus from the shelf<br><small>or explore a ready-made setup above.</small></div>
+      </div>
+      <div class="camera">
+        <span>Drag apparatus to arrange · Select to configure</span>
+        <div>
+          <button id="left" aria-label="Rotate camera left">↶</button>
+          <button id="right" aria-label="Rotate camera right">↷</button>
+          <button id="zoomIn" aria-label="Zoom in">＋</button>
+          <button id="zoomOut" aria-label="Zoom out">−</button>
+        </div>
+      </div>
+    </section>
+    <div class="playback">
+      <button id="run" class="primary">▶ Run experiment</button>
+      <button id="step">Step 1 s</button>
+      <button id="reset">↻ Reset & repair</button>
+      <label>Speed
+        <select id="speed">
+          <option value="1">1×</option>
+          <option value="5">5×</option>
+          <option value="20" selected>20×</option>
+        </select>
+      </label>
+      <output id="time">0.0 s</output>
+      <label class="motion"><input type="checkbox" id="motion" checked> Animate effects</label>
+    </div>
+    <p id="status" role="status">Choose a setup or add apparatus to begin.</p>
+    <div class="bottomgrid">
+      <section class="panel">
+        <div class="eyebrow">03 / CONNECT YOUR SETUP</div>
+        <h2>Connections</h2>
+        <form id="connect">
+          <label>Connection type
+            <select id="linkkind">
+              <option value="thermal">Thermal → heat / cool</option>
+              <option value="tube">Tube → fluid / stress</option>
+              <option value="wire">Wire → electrical terminal</option>
+              <option value="support">Support → pendulum</option>
+            </select>
+          </label>
+          <div class="pair">
+            <label>From<select id="from"></select></label>
+            <label class="port">Terminal<select id="fromport"><option>A</option><option>B</option></select></label>
+          </div>
+          <div class="pair">
+            <label>To<select id="to"></select></label>
+            <label class="port">Terminal<select id="toport"><option>A</option><option>B</option></select></label>
+          </div>
+          <button type="submit">＋ Connect apparatus</button>
+        </form>
+        <div id="links"></div>
+      </section>
+      <section class="panel">
+        <div class="eyebrow">04 / OBSERVE</div>
+        <h2>Live measurements</h2>
+        <div id="readings"></div>
+        <div id="events" aria-live="polite"></div>
+        <p class="fine">Effects are explanatory visuals. Fictional failure demonstrations are not predictions of real pressure limits or explosive chemistry.</p>
+      </section>
+    </div>
+    <section class="panel">
+      <div class="sectionhead">
+        <h2>Experiment notebook</h2>
+        <button id="csv">↓ Readings CSV</button>
+      </div>
+      <div class="pair">
+        <label>Experiment name<input id="name" maxlength="80"></label>
+        <label>Plot measurement
+          <select id="metric">
+            <option value="temperature">Temperature (°C)</option>
+            <option value="ice">Ice fraction</option>
+            <option value="vapor">Vapor fraction</option>
+            <option value="stress">Fictional stress (units)</option>
+            <option value="current">Current (A)</option>
+            <option value="power">Electrical power (W)</option>
+            <option value="condensate">Collected condensate (g)</option>
+            <option value="angle">Pendulum angle (rad)</option>
+          </select>
+        </label>
+      </div>
+      <div id="graph"></div>
+      <p class="fine" id="samples">Run to collect readings for the selected apparatus. Up to 600 samples per run.</p>
+      <label>Hypothesis & observations
+        <textarea id="notes" rows="3" placeholder="What will happen? What changed? What did you measure?"></textarea>
+      </label>
+      <button id="report">↓ Download report</button>
+      <p class="fine">Saving stores the setup and notes in this browser. Export JSON to move them between devices; download CSV to keep run data. Editing apparatus restarts the simulation.</p>
+    </section>
+  </main>
+  <aside class="inspector">
+    <div class="eyebrow">02 / CONFIGURE</div>
+    <h2>Apparatus inspector</h2>
+    <label>Selected apparatus
+      <select id="selected"><option value="">Choose an item…</option></select>
+    </label>
+    <div id="inspector"></div>
+  </aside>
+</div>
+<footer>CHEMIA / A place for curious minds. <span>Idealized models · Supported combinations only</span></footer>
+</body>
+</html>

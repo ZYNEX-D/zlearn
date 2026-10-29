@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {simulate,experiments} from '../dist/model.js';
+import {simulate,experiments} from '../src/core/model.js';
 test('titration starts at pH 1, reaches neutral equivalence, then becomes basic',()=>{assert.ok(Math.abs(simulate('titration',{volume:25,concentration:.1},0).a-1)<1e-8);assert.equal(simulate('titration',{volume:25,concentration:.1},1).a,7);assert.ok(simulate('titration',{volume:30,concentration:.1},1).a>11);});
 test('doubling base concentration halves equivalent volume',()=>assert.equal(simulate('titration',{volume:12.5,concentration:.2},1).a,7));
 test('gas production respects the limiting acid',()=>{const r=simulate('gas',{mass:1,concentration:.1},1);assert.ok(Math.abs(r.a-24.47)<1e-10);assert.equal(r.b,100);});
