@@ -12,17 +12,20 @@ The public UI redirects to `/console/templates/resource`. It displays a premium 
 
 The RGB lesson exposes a real-time 3D scene, camera controls, clickable apparatus/component labels, information tabs, editable values, run/stop interaction, progress, and a lesson carousel. Chemia implements its own equivalent interaction pattern with original chemistry models and a distinct visual design.
 
-## Delivered version: 0.1
+## Delivered version: 0.2
 
 | Area | Status |
 | --- | --- |
 | Interactive 3D laboratory | Implemented, original procedural apparatus |
-| Guided experiments | Six working models |
-| Adjustable variables and reaction animation | Implemented for all six |
-| Science explanations and quizzes | Implemented for all six |
+| Guided experiments | 16 working models: 10 physics + 6 chemistry |
+| Adjustable variables and reaction animation | Implemented for all 16 |
+| Science explanations and quizzes | Implemented for all 16 |
 | Search/topic filtering | Implemented |
 | Apparatus information | Implemented |
-| Notebook/progress/export | Implemented locally in the browser |
+| Notebook/progress/export | Local persistence, restorable setups, Markdown/CSV/SVG/PNG exports |
+| Time controls | Scrubbing, step, speed, repeat |
+| Analysis | Time plots, parameter sweeps, baseline comparison, data tables |
+| Physics presets | 30 presets across ten experiments |
 | Free lab | Limited to supported reaction models and decorative extra vessels |
 | Full 138-item NOBOOK catalog | Not implemented |
 | General drag-and-connect experiment editor | Not implemented |
@@ -44,4 +47,11 @@ The RGB lesson exposes a real-time 3D scene, camera controls, clickable apparatu
 
 ## Validation completed
 
-Eight model assertions cover titration equivalence, concentration changes, limiting acid, electrolysis ratios, precipitation mass, heating/boiling, diffusion temperature trend, and finite outputs at control boundaries. Browser smoke checks cover initial scene, simulation progression, notebook recording, quizzes, and library search. See chat handoff for any additional final checks or limitations.
+The original eight chemistry assertions cover titration equivalence, concentration changes, limiting acid, electrolysis ratios, precipitation mass, heating/boiling, diffusion temperature trend, and finite outputs at control boundaries. Browser smoke checks cover initial scene, simulation progression, notebook recording, quizzes, and library search. See chat handoff for any additional final checks or limitations.
+
+
+## Physics expansion
+
+Implemented ten physics models with original 3D apparatus, controls, reference-linked explanations, and challenges: pendulum, spring, projectile, inclined plane, collisions, DC circuit, refraction, converging lens, traveling wave, and buoyancy. Thirteen additional automated checks validate core physical laws, boundary behavior, sampling, plotting, and CSV exports.
+
+The platform remains a curated simulation laboratory. It is not a general rigid-body engine, arbitrary circuit builder, arbitrary reagent solver, or full NOBOOK replacement. Accounts, cloud saves, classroom roles, and multilingual content are still not implemented.
