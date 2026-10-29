@@ -55,3 +55,6 @@ The original eight chemistry assertions cover titration equivalence, concentrati
 Implemented ten physics models with original 3D apparatus, controls, reference-linked explanations, and challenges: pendulum, spring, projectile, inclined plane, collisions, DC circuit, refraction, converging lens, traveling wave, and buoyancy. Thirteen additional automated checks validate core physical laws, boundary behavior, sampling, plotting, and CSV exports.
 
 The platform remains a curated simulation laboratory. It is not a general rigid-body engine, arbitrary circuit builder, arbitrary reagent solver, or full NOBOOK replacement. Accounts, cloud saves, classroom roles, and multilingual content are still not implemented.
+
+## A/L and SFT curriculum extension
+`practicals.html` provides 110 modules mapped to the supplied 134-entry practical list. Each is labeled analytical, guided demo, or partial. View `CURRICULUM_COVERAGE.md` for the requirements matrix. Apparatus manipulation, alignment, calibration, many preparation procedures, and some compound-practical subparts remain outside the implemented models. The workbench supplements the original 16 3D experiments with SVG schematics, measurement tables, least-squares graphs, CSV and Markdown reports, and browser-local conclusions.

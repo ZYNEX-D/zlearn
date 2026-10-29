@@ -60,3 +60,6 @@ Physics lessons link to the relevant OpenStax University Physics chapters. Model
 ## Verification
 
 `npm test` passes 21 checks. Browser smoke tests exercised all 10 physics scenes at end-of-run, Earth/Moon presets and baseline comparison, parameter sweep selection, total internal reflection, note recording and setup restoration, subject/topic filters, and the original titration model. No console warnings/errors were found during the physics scene pass. Touch-device and multi-browser verification remain future work.
+
+## Curriculum workbench (v0.3)
+Open `/practicals.html` or use **A/L & SFT practicals** in the lab header. Includes 110 analytical/qualitative activities mapped to 134 supplied checklist entries, animated SVG schematics, adjustable inputs, recorded observations, linear fits, local notes, CSV/report exports, and a downloadable coverage audit. These additions do not provide 110 full 3D procedural simulations. See `CURRICULUM_COVERAGE.md` for exact partial-support gaps. Tests cover 740 default/boundary/selection cases, catalogue integrity and sample physical invariants; these are not independent scientific accreditation.
